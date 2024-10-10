@@ -18,6 +18,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+
 def create_vector_db(file_upload) -> Chroma:
     """
     Create a vector database from an uploaded PDF file using SentenceTransformer embeddings.
@@ -49,7 +50,7 @@ def create_vector_db(file_upload) -> Chroma:
     logger.info("Document split into chunks")
 
     # Initialize SentenceTransformer model and HuggingFaceEmbeddings
-    sentence_model = SentenceTransformer('all-MiniLM-L6-v2')
+    # sentence_model = SentenceTransformer('all-MiniLM-L6-v2')
     embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
     
     # Persist the vector database to a directory

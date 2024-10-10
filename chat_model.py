@@ -47,12 +47,17 @@ def process_question(question: str, vector_db: Chroma, selected_model: str) -> s
         vector_db.as_retriever(), llm, prompt=QUERY_PROMPT
     )
 
+    # template = """Answer the question based ONLY on the following context:
+    # {context}
+    # Question: {question}
+    # If you don't know the answer, just say that you don't know, don't try to make up an answer.
+    # Only provide the answer from the {context}, nothing else.
+    # Add snippets of the context you used to answer the question.
+    # """
+    # RAG prompt
     template = """Answer the question based ONLY on the following context:
     {context}
     Question: {question}
-    If you don't know the answer, just say that you don't know, don't try to make up an answer.
-    Only provide the answer from the {context}, nothing else.
-    Add snippets of the context you used to answer the question.
     """
 
     prompt = ChatPromptTemplate.from_template(template)
