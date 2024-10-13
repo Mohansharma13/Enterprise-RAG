@@ -7,13 +7,15 @@ WORKDIR /app
 COPY . .
 
 # Install dependencies
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install Ollama using curl, ensure curl is available in your container
+# Install curl and Ollama
+RUN apt-get update && apt-get install -y curl
 RUN curl -fsSL https://ollama.com/install.sh | sh
 
-# Expose port 5000
-EXPOSE 5000
+# Expose ports
+EXPOSE 5000 8501
 
 # Run Ollama and Streamlit
-CMD ["sh", "-c", "ollama serve & ollama run llama3.2 & streamlit run ./app.py"]
+CMD ["sh", "-c", "ollama pull llama3.2 & streamlit run ./ragapp.py"]
