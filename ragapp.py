@@ -1,6 +1,6 @@
 import streamlit as st
 import logging
-import ollama
+# import ollama
 from typing import List, Tuple, Dict, Any, Optional
 
 # import udf modules
@@ -27,21 +27,22 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 @st.cache_resource(show_spinner=True)
-def extract_model_names(
-    models_info: Dict[str, List[Dict[str, Any]]],
-) -> Tuple[str, ...]:
-    """
-    Extract model names from the provided models information.
+def extract_model_names():
+#     models_info: Dict[str, List[Dict[str, Any]]],
+# ) -> Tuple[str, ...]:
+#     """
+#     Extract model names from the provided models information.
 
-    Args:
-        models_info (Dict[str, List[Dict[str, Any]]]): Dictionary containing information about available models.
+#     Args:
+#         models_info (Dict[str, List[Dict[str, Any]]]): Dictionary containing information about available models.
 
-    Returns:
-        Tuple[str, ...]: A tuple of model names.
-    """
-    logger.info("Extracting model names from models_info")
-    model_names = tuple(model["name"] for model in models_info["models"])
-    logger.info(f"Extracted model names: {model_names}")
+#     Returns:
+#         Tuple[str, ...]: A tuple of model names.
+#     """
+#     logger.info("Extracting model names from models_info")
+#     model_names = tuple(model["name"] for model in models_info["models"])
+#     logger.info(f"Extracted model names: {model_names}")
+    model_names="gamma_model"
     return model_names
 
 def main() -> None:
@@ -53,8 +54,8 @@ def main() -> None:
     """
     st.subheader("IntelliQuest: Navigating Business Decisions 📈", divider="gray", anchor=False)
 
-    models_info = ollama.list()
-    available_models = extract_model_names(models_info)
+    # models_info = ollama.list()
+    available_models = extract_model_names()
 
     col1, col2 = st.columns([1.5, 2])
 
