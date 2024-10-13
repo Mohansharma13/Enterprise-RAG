@@ -1,7 +1,7 @@
 from langchain_community.vectorstores import Chroma
 from langchain.prompts import ChatPromptTemplate, PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-# from langchain_community.chat_models import ChatOllama
+from langchain_community.chat_models import ChatOllama
 from langchain_core.runnables import RunnablePassthrough
 from langchain.retrievers.multi_query import MultiQueryRetriever
 import logging
@@ -10,9 +10,6 @@ from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 # Load environment variables from the .env file
-load_dotenv()
-
-os.environ["GOOGLE_API_KEY"]=os.getenv("GEMMA_KEYGOOGLE_API_KEY")
 
 # Logging configuration
 logging.basicConfig(
@@ -39,16 +36,16 @@ def process_question(question: str, vector_db: Chroma, selected_model: str) -> s
     logger.info(f"""Processing question: {
                 question} using model: {selected_model}""")
     
-    llm = ChatGoogleGenerativeAI(
-    model="gemini-1.5-pro",
-    temperature=0,
-    max_tokens=None,
-    timeout=None,
-    max_retries=2,
-    # other params...
-)
+#     llm = ChatGoogleGenerativeAI(
+#     model="gemini-1.5-pro",
+#     temperature=0,
+#     max_tokens=None,
+#     timeout=None,
+#     max_retries=2,
+#     # other params...
+# )
     
-    # llm = ChatOllama(model=selected_model, temperature=0)
+    llm = ChatOllama(model=selected_model, temperature=0)
     
     QUERY_PROMPT = PromptTemplate(
         input_variables=["question"],
